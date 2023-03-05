@@ -27,7 +27,16 @@ const workData = [
     description: `Exploring the future of media in Facebook's first Virtual Reality
     app; a place to discover and enjoy 360 photos and videos on Gear
     VR.`,
-    tags: ["html", "Ruby on rails", "css", "javascript"],
+    tags: [
+      "html",
+      "Ruby on rails",
+      "css",
+      "javascript",
+      "c#",
+      "python",
+      "react",
+      "node.js",
+    ],
     imgSrc: "assets/portfolio-3.svg",
     sourceLink: "https://github.com/abel-tefera/portfolio",
     demoLink: "https://abel-tefera.github.io/",
@@ -86,7 +95,7 @@ const openModal = (id) => {
   modal.classList.add("open-modal");
   modalOverlay.classList.add("open-modal");
 
-  document.body.style.overflow = 'hidden';
+  // document.body.style.overflow = "hidden";
 };
 
 const closeModal = function () {
@@ -100,8 +109,7 @@ const closeModal = function () {
   modal.classList.add("hidden");
   modalOverlay.classList.add("hidden");
 
-  document.body.style.overflow = 'scroll';
-
+  document.body.style.overflow = "scroll";
 };
 
 modalOverlay.addEventListener("click", closeModal);
@@ -199,8 +207,8 @@ class workModal extends HTMLElement {
         iusto suscipit, modi voluptatum totam. Iusto placeat perferendis
         corporis perspiciatis deserunt?
       </p>
-      <div>
-        <ul class="work-tags-div disable-default modal-work-tags">
+      <div class="modal-right">
+        <ul class="work-tags-div disable-default">
           ${tagsLi}
         </ul>
         <hr />
@@ -251,6 +259,58 @@ const closeMobileMenu = () => {
     menu.style.visibility = "hidden";
   }, 500);
 };
+
+const accordionEL = document.querySelectorAll(".accordion");
+const panels = document.querySelectorAll(".panel");
+const defaultAccordion = document.querySelector(".accordion-default");
+
+const rotateArrowRight = (icon) => {
+  icon[0].classList.add("accordion-icon-open");
+};
+
+const rotateArrowUp = (icon) => {
+  icon[0].classList.remove("accordion-icon-open");
+};
+
+const handleAccordion = (accordion) => {
+  const sibling = accordion.nextElementSibling;
+  const icon = accordion.getElementsByTagName("img");
+
+  accordionEL.forEach((acc) => {
+    const otherIcon = acc.getElementsByTagName("img");
+
+    if (acc !== accordion) {
+      rotateArrowUp(otherIcon)
+    }
+  });
+
+  panels.forEach((panel) => {
+    if (panel == sibling) {
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+        rotateArrowUp(icon)
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+        rotateArrowRight(icon)
+      }
+    } else {
+      panel.style.maxHeight = null;
+    }
+  });
+};
+
+accordionEL.forEach((acc) => {
+  if (acc == defaultAccordion) {
+    const sibling = acc.nextElementSibling;
+    const icon = acc.getElementsByTagName("img");
+    rotateArrowRight(icon);
+    sibling.style.maxHeight = sibling.scrollHeight + "px";
+  }
+
+  acc.addEventListener("click", () => {
+    handleAccordion(acc);
+  });
+});
 
 let sections = document.querySelectorAll("section");
 let navLinks = document.querySelectorAll(".links");

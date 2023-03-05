@@ -177,12 +177,22 @@ a:active {
   color: rgba(37, 56, 88, 1);
 }
 
-.language-list-item img {
-  padding: 0.5rem;
+.language-list-item li {
+  flex: 33.3%;
+  background-color: #f7f7f9;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-radius: 1rem;
 }
 
-.language-list-item li img {
+.language-list-item img {
   padding: 0.5rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .social-links img:hover {
@@ -235,17 +245,14 @@ a:active {
   margin-bottom: 0;
 }
 
-.rotate-arrow {
-  transform: rotate(-90deg);
-}
-
 .work-tags-div {
   display: flex;
   align-items: center;
   justify-content: start;
   width: 100%;
   margin: 0.5rem 0;
-  height: 2.5rem;
+  height: auto;
+  flex-wrap: wrap;
 }
 
 .about-headline {
@@ -473,16 +480,6 @@ input:focus {
   width: 100%;
 }
 
-.language-list-item li {
-  background-color: #f7f7f9;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  width: 100%;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-}
-
 .mobile-overlay {
   height: 0;
   width: 0;
@@ -534,6 +531,7 @@ input:focus {
 .modal {
   position: fixed;
   height: 100vh;
+  width: 100vw;
   top: 0;
   left: 0;
   z-index: 10;
@@ -542,11 +540,18 @@ input:focus {
   align-self: center;
   justify-self: center;
   justify-content: center;
-  padding: 3rem 1rem;
+  padding-top: 6rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   box-sizing: border-box;
   transition: opacity 0.5s ease, visibility 0.5s ease;
   opacity: 0;
   pointer-events: none;
+  overflow-y: scroll;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
 }
 
 .modal-overlay {
@@ -654,12 +659,35 @@ input:focus {
   display: none;
 }
 
+.accordion {
+  transition: 0.4s;
+  padding: 0 1rem;
+}
+
+.accordion-active, .accordion:hover {
+  background-color: #ccc;
+}
+
+.panel {
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  max-height: 0;
+}
+
+.accordion-icon {
+  transition:  transform 0.2s;
+}
+
+.accordion-icon-open {
+  transform: rotate(-90deg);
+}
+
 @media only screen and (min-width: 768px) {
   .header {
-    height: 6rem;
+    height: 4rem;
     align-items: center;
-    padding-left: 6rem;
-    padding-right: 6rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 
   .logo {
@@ -748,12 +776,12 @@ input:focus {
   }
 
   .work-info p {
-    font-size: 1.125rem;
+    font-size: 1rem;
     line-height: 1rem;
   }
 
   .introduction {
-    margin: 3rem 6rem 3rem 12rem;
+    margin: 3rem 6rem 3rem 6rem;
   }
 
   .links-container {
@@ -766,7 +794,7 @@ input:focus {
 
   .work-card {
     flex-direction: row;
-    width: 90%;
+    width: 95%;
   }
 
   .work-card-reversed {
@@ -774,7 +802,7 @@ input:focus {
   }
 
   .work-description {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   .work-img {
@@ -819,6 +847,10 @@ input:focus {
     flex-direction: row;
   }
 
+  .languages p {
+    text-align: center;
+  }
+
   .btn:hover {
     animation-name: btn-hover;
     animation-fill-mode: forwards;
@@ -860,7 +892,7 @@ input:focus {
   }
 
   .contact {
-    width: 50%;
+    width: 75%;
     place-self: center;
   }
 
@@ -887,14 +919,14 @@ input:focus {
 
   .shapes::before {
     background-image: url("assets/headline-background.svg");
-    top: 10%;
+    top: -15%;
     z-index: 1;
   }
 
   .modal {
-    padding: 4rem 6rem;
-    max-height: 100vh;
-    overflow-y: scroll;
+    padding-left: 6rem;
+    padding-right: 6rem;
+    padding-top: 12rem;
   }
 
   .modal-headline {
@@ -906,7 +938,7 @@ input:focus {
   }
 
   .modal-content {
-    /* margin-top: 16rem; */
+    margin-top: 6rem;
   }
 
   .modal-headline h1 {
@@ -946,20 +978,46 @@ input:focus {
     width: 60%;
   }
 
-  .modal-div-content > div {
+  .modal-right {
     margin-left: 1rem;
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .header {
+    height: 6rem;
+    padding-left: 6rem;
+    padding-right: 6rem;
   }
 
-  .modal-work-tags {
-    width: auto;
-    /* flex-wrap: wrap; */
+  .work-info p {
+    font-size: 1.125rem;
   }
 
-  /* .modal-work-tags li {
-    flex: 33.3%;
-  } */
+  .introduction {
+    margin-left: 12rem;
+  }
 
-  .modal-work-tags .work-tags {
-    width: fit-content;
+  .work-description {
+    font-size: 1.2rem;
+  }
+
+  .shapes::before {
+    top: 10%;
+  }
+
+  .contact {
+    width: 60%;
+  }
+
+  .work-card {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .contact {
+    width: 50%;
   }
 }
