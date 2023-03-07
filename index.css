@@ -302,7 +302,6 @@ ul {
 }
 
 .languages p {
-  border: 1px 1px 0 0 solid;
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.5rem;
@@ -664,7 +663,7 @@ input:focus {
   padding: 0 1rem;
 }
 
-.accordion-active, .accordion:hover {
+.accordion:hover {
   background-color: #ccc;
 }
 
@@ -675,11 +674,15 @@ input:focus {
 }
 
 .accordion-icon {
-  transition:  transform 0.2s;
+  transition: transform 0.2s;
 }
 
 .accordion-icon-open {
   transform: rotate(-90deg);
+}
+
+.circle-btn {
+  display: none;
 }
 
 @media only screen and (min-width: 768px) {
@@ -981,6 +984,38 @@ input:focus {
   .modal-right {
     margin-left: 1rem;
     width: 40%;
+  }
+
+  .modal-div-flex {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .circle-btn {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    align-self: center;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .circle-btn:hover,
+  .circle-btn:active {
+    background-color: #ccc;
+    cursor: pointer;
+  }
+
+  #modal-prev .modal-icon {
+    transform: rotate(90deg);
+  }
+
+  #modal-next .modal-icon {
+    transform: rotate(-90deg);
   }
 }
 
